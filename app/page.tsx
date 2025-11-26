@@ -1,65 +1,140 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { Button } from "@/components/ui/button";
+import LandingPage from "@/app/home/page";
+import Link from "next/link";
 
 export default function Home() {
+  const [showLanding, setShowLanding] = useState(false);
+  const introRef = useRef<HTMLDivElement>(null);
+  const firstBgRef = useRef<HTMLSpanElement>(null);
+  const secBgRef = useRef<HTMLSpanElement>(null);
+  const firstWordRef = useRef<HTMLSpanElement>(null);
+  const secWordRef = useRef<HTMLSpanElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const topSplitRef = useRef<HTMLDivElement>(null);
+  const bottomSplitRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0.5 });
+
+    // Text reveal animation
+    tl.to(firstBgRef.current, { scaleX: 1, duration: 0.2 })
+      .to(secBgRef.current, { scaleX: 1, duration: 0.2 })
+      .to(
+        [firstWordRef.current, secWordRef.current],
+        { opacity: 1, duration: 0.1 },
+        "-=0.1"
+      )
+      .to(firstBgRef.current, {
+        scaleX: 0,
+        transformOrigin: "right",
+        duration: 0.2,
+      })
+      .to(secBgRef.current, {
+        scaleX: 0,
+        transformOrigin: "right",
+        duration: 0.2,
+      })
+      // Button appears 0.5s after text animation
+      .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.3 }, "+=0.5");
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
+  const handleGetStarted = () => {
+    const splitTl = gsap.timeline({
+      onComplete: () => setShowLanding(true),
+    });
+
+    // Diagonal split animation
+    splitTl
+      .to(topSplitRef.current, {
+        yPercent: -100,
+        xPercent: -10,
+        duration: 0.8,
+        ease: "power3.inOut",
+      })
+      .to(
+        bottomSplitRef.current,
+        {
+          yPercent: 100,
+          xPercent: 10,
+          duration: 0.8,
+          ease: "power3.inOut",
+        },
+        "<"
+      );
+  };
+
+  // if (showLanding) {
+  //   return <LandingPage />
+  // }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="relative h-screen w-full overflow-hidden">
+      {/* Top diagonal split */}
+      <div
+        ref={topSplitRef}
+        className="absolute inset-0 z-20 bg-[#5fbff9]"
+        style={{
+          clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 50%)",
+        }}
+      />
+
+      {/* Bottom diagonal split */}
+      <div
+        ref={bottomSplitRef}
+        className="absolute inset-0 z-20 bg-[#f06543]"
+        style={{
+          clipPath: "polygon(0 50%, 100% 50%, 100% 100%, 0 100%)",
+        }}
+      />
+
+      {/* Intro content */}
+      <div
+        ref={introRef}
+        className="relative z-30 flex h-full w-full flex-col items-center justify-center bg-white"
+      >
+        <div className="inline-block font-sans text-[15vmin] font-black leading-[1.205] text-[#353535]">
+          {/* Hello */}
+          <span className="relative inline-block">
+            <span ref={firstWordRef} className="opacity-0">
+              Hello{" "}
+            </span>
+            <span
+              ref={firstBgRef}
+              className="absolute left-0 top-0 z-10 block h-full w-full origin-left scale-x-0 bg-[#5fbff9]"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </span>
+          <br />
+          {/* World */}
+          <span className="relative ml-[15vmin] inline-block">
+            <span ref={secWordRef} className="opacity-0">
+              World
+            </span>
+            <span
+              ref={secBgRef}
+              className="absolute left-0 top-0 z-10 block h-full w-full origin-left scale-x-0 bg-[#f06543]"
+            />
+          </span>
         </div>
-      </main>
+
+        {/* Get Started Button */}
+        <Link href="/home">
+          <Button
+            ref={buttonRef}
+            // onClick={handleGetStarted}
+            className="mt-12 translate-y-4 cursor-pointer rounded-full bg-[#353535] px-8 py-4 text-lg font-semibold text-white opacity-0 transition-colors hover:bg-[#5fbff9]"
+          >
+            Get Started &gt;
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
