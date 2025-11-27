@@ -2,7 +2,7 @@
 
 import { ShieldCheck } from "lucide-react"
 const NavItem: string[] =
-    ['Home', 'DeFi App', 'Assets', 'Features', 'Pricing', 'FAQ']
+    ['Home', 'Product', 'About', 'Contact']
 
 
 const Navigation = () => {

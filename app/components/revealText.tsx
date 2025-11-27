@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 
-export function LandingPage() {
+export function RevealText() {
   const containerRef = useRef<HTMLDivElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
   const featuresRef = useRef<HTMLDivElement>(null)
@@ -16,6 +16,7 @@ export function LandingPage() {
       y: 30,
       duration: 0.6,
       ease: "power2.out",
+      zIndex: 999
     }).from(
       featuresRef.current?.children || [],
       {
@@ -24,13 +25,14 @@ export function LandingPage() {
         duration: 0.4,
         stagger: 0.1,
         ease: "power2.out",
+        zIndex: 999
       },
       "-=0.2",
     )
   }, [])
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-[#2c2d2e] to-[#e2e8f0]">
+    <div ref={containerRef} className="min-h-screen z-9999 bg-gradient-to-br from-[#2c2d2e] to-[#e2e8f0]">
       {/* Hero Section */}
       <div ref={heroRef} className="px-6 py-20 text-center">
         <h1 className="mb-6 text-balance text-5xl font-black text-[#353535] md:text-7xl">
