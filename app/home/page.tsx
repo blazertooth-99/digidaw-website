@@ -2,6 +2,7 @@
 
 import HeroPage from "./hero";
 import PortraitGallery from "./portraitGallery";
+import SubscribePage from "./subscribePage";
 import VerticalImage from "./verticalImage";
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
       <HeroPage />
       <PortraitGallery />
       <VerticalImage />
+      <SubscribePage />
     </main>
   );
 };

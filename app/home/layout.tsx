@@ -1,3 +1,4 @@
+import { Footer } from "../components/footer";
 import Navigation from "../components/navigation";
 import type { Metadata } from "next";
 
@@ -15,6 +16,7 @@ export default function HomeLayout({
     <>
       <Navigation />
       {children}
+      <Footer />
     </>
   );
 }

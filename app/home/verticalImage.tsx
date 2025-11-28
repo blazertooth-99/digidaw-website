@@ -116,19 +116,19 @@ export default function VerticalImage() {
       trigger: sectionRef.current,
       start: "top 50%",
       end: "bottom 50%",
-      onUpdate: (self) => {
-        const velocity = self.getVelocity();
-        if (velocity > 0) {
-          if (additionalYAnim) additionalYAnim.kill();
-          additionalY.val = -velocity / 2000;
-          additionalYAnim = gsap.to(additionalY, { val: 0 });
-        }
-        if (velocity < 0) {
-          if (additionalYAnim) additionalYAnim.kill();
-          additionalY.val = -velocity / 3000;
-          additionalYAnim = gsap.to(additionalY, { val: 0 });
-        }
-      },
+      // onUpdate: (self) => {
+      //   const velocity = self.getVelocity();
+      //   if (velocity > 0) {
+      //     if (additionalYAnim) additionalYAnim.kill();
+      //     additionalY.val = -velocity / 2000;
+      //     additionalYAnim = gsap.to(additionalY, { val: 0 });
+      //   }
+      //   if (velocity < 0) {
+      //     if (additionalYAnim) additionalYAnim.kill();
+      //     additionalY.val = -velocity / 3000;
+      //     additionalYAnim = gsap.to(additionalY, { val: 0 });
+      //   }
+      // },
     });
 
     return () => {
