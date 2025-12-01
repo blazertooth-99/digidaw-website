@@ -11,24 +11,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const portraits = [
   {
-    url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-    name: "Emma",
+    url: "https://images.unsplash.com/photo-1467043237213-65f2da53396f?w=800&h=800&q=90&fit=crop&crop=faces&https%3A%2F%2Fimages.unsplash.com%2Fphoto-1524502397800-2eeaad7c3fe5%3Fq=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Casual",
   },
   {
-    url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-    name: "Sophia",
+    url: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800&h=800&q=90&fit=crop&crop=faces&https%3A%2F%2Fimages.unsplash.com%2Fphoto-1524502397800-2eeaad7c3fe5%3Fq=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Jeans",
   },
   {
-    url: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-    name: "Olivia",
+    url: "https://images.unsplash.com/photo-1551084804-4b60b3c10f9e?w=800&h=800&q=90&fit=crop&crop=faces&https%3A%2F%2Fimages.unsplash.com%2Fphoto-1524502397800-2eeaad7c3fe5%3Fq=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Dress",
   },
   {
-    url: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-    name: "Ava",
+    url: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&h=800&q=90&fit=crop&crop=faces&https%3A%2F%2Fimages.unsplash.com%2Fphoto-1524502397800-2eeaad7c3fe5%3Fq=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Polo",
   },
   {
-    url: "https://images.unsplash.com/photo-1543357530-d91dab30fa97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTN8fHBvcnRyYWl0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-    name: "Mia",
+    url: "https://images.unsplash.com/photo-1587631550085-2d4bed859ea9?w=800&h=800&q=90&fit=crop&crop=faces&https%3A%2F%2Fimages.unsplash.com%2Fphoto-1524502397800-2eeaad7c3fe5%3Fq=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    name: "Top Wear & Under Wear",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function PortraitGallery() {
   return (
     <main
       ref={containerRef}
-      className="trigger relative min-h-screen flex flex-col items-center justify-center py-10 bg-linear-to-b from-[#030303] to-[#9d8ce0] to-80% select-none overflow-hidden"
+      className="trigger relative min-h-screen flex flex-col items-center justify-center py-10 bg-linear-to-b from-[#030303] to-[#fad9dc] to-80% select-none overflow-hidden"
     >
       <div ref={titleRef} className="title mb-8 text-center">
         <Badge
@@ -172,7 +172,7 @@ export default function PortraitGallery() {
               itemsRef.current[index] = el;
             }}
             onClick={() => handleExpand(index)}
-            className="w-[15vw] h-[75vh] bg-center inline-block mx-[1vw] rounded-[3vw] cursor-pointer shadow-2xl
+            className="w-[15vw] h-[75vh] bg-center inline-block mx-[1vw] rounded-2xl cursor-pointer shadow-lg
             hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] transition-shadow duration-300 relative group overflow-hidden"
             style={{
               backgroundImage: `url(${portrait.url})`,

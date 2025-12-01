@@ -3,25 +3,24 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Badge } from "@/components/ui/badge";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const images = [
   [
-    "https://images.pexels.com/photos/10324713/pexels-photo-10324713.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/10533885/pexels-photo-10533885.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/10253213/pexels-photo-10253213.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=800&q=90&fit=crop",
+    "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?w=800&h=800&q=90&fit=crop",
+    "https://images.unsplash.com/photo-1512101903502-7eb0c9022c74?w=800&h=800&q=90&fit=crop",
   ],
   [
-    "https://images.pexels.com/photos/10050979/pexels-photo-10050979.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/1128660/pexels-photo-1128660.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/9699293/pexels-photo-9699293.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "https://images.unsplash.com/photo-1550928431-ee0ec6db30d3?w=800&h=800&q=90&fit=crop",
+    "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=800&h=800&q=90&fit=crop",
+    "https://images.unsplash.com/photo-1562572159-4efc207f5aff?w=800&h=800&q=90&fit=crop",
   ],
   [
-    "https://images.pexels.com/photos/6405575/pexels-photo-6405575.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/10162526/pexels-photo-10162526.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    "https://images.pexels.com/photos/4394807/pexels-photo-4394807.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    "https://images.unsplash.com/photo-1628102160424-5f4ab3404829?w=800&h=800&q=90&fit=crop",
+    "https://images.unsplash.com/photo-1621784562807-cb450c2f5efc?w=800&h=800&q=90&fit=crop",
+    "https://images.unsplash.com/photo-1711888386245-9ca3477a5977?w=800&h=800&q=90&fit=crop",
   ],
 ];
 
@@ -39,9 +38,9 @@ export default function VerticalImage() {
         { opacity: 0, y: 100, scale: 0.8 },
         {
           opacity: 1,
-          y: 0,
+          y: 20,
           scale: 1,
-          duration: 2,
+          duration: 0.8,
           stagger: 0.2,
           ease: "back.out(1.7)",
           zIndex: 999,
@@ -49,18 +48,18 @@ export default function VerticalImage() {
             trigger: containerRef.current,
             start: "top top",
             end: "bottom bottom",
-            scrub: 2,
+            toggleActions: "play none none none",
           },
         }
       );
       gsap.to(titleRef.current, {
-        yPercent: 20,
+        yPercent: 0,
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 2,
+          toggleActions: "play none none none",
         },
       });
       //   ScrollTrigger.refresh();
@@ -112,46 +111,49 @@ export default function VerticalImage() {
       });
     });
 
-    const scrollTrigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top 50%",
-      end: "bottom 50%",
-      // onUpdate: (self) => {
-      //   const velocity = self.getVelocity();
-      //   if (velocity > 0) {
-      //     if (additionalYAnim) additionalYAnim.kill();
-      //     additionalY.val = -velocity / 2000;
-      //     additionalYAnim = gsap.to(additionalY, { val: 0 });
-      //   }
-      //   if (velocity < 0) {
-      //     if (additionalYAnim) additionalYAnim.kill();
-      //     additionalY.val = -velocity / 3000;
-      //     additionalYAnim = gsap.to(additionalY, { val: 0 });
-      //   }
-      // },
-    });
+    // const scrollTrigger = ScrollTrigger.create({
+    //   trigger: sectionRef.current,
+    //   start: "top 50%",
+    //   end: "bottom 50%",
+    //   onUpdate: (self) => {
+    //     const velocity = self.getVelocity();
+    //     if (velocity > 0) {
+    //       if (additionalYAnim) additionalYAnim.kill();
+    //       additionalY.val = -velocity / 2000;
+    //       additionalYAnim = gsap.to(additionalY, { val: 0 });
+    //     }
+    //     if (velocity < 0) {
+    //       if (additionalYAnim) additionalYAnim.kill();
+    //       additionalY.val = -velocity / 3000;
+    //       additionalYAnim = gsap.to(additionalY, { val: 0 });
+    //     }
+    //   },
+    // });
 
-    return () => {
-      animations.forEach((anim) => anim.kill());
-      scrollTrigger.kill();
-    };
+    // return () => {
+    //   animations.forEach((anim) => anim.kill());
+    //   scrollTrigger.kill();
+    // };
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen bg-linear-to-b from-[#9d8ce0] to-[#030303] to-80% text-neutral-900 overflow-x-hidden"
+      className="relative min-h-screen bg-linear-to-b from-[#fad9dc] to-[#030303] to-80% text-neutral-900 overflow-x-hidden"
     >
       {/* Main Section */}
       <section
         ref={sectionRef}
         className="flex items-center justify-center h-screen relative w-full overflow-visible mx-auto"
       >
-        <div ref={titleRef} className="absolute text-center w-1/2 text-balance text-white">
-          <h1 className="font-extrabold text-3xl md:text-5xl pointer-events-none">
-            Vertical image loop with scroll acceleration with GSAP
+        <div
+          ref={titleRef}
+          className="absolute text-center w-1/2 text-balance text-white"
+        >
+          <h1 className="font-bold font-serif italic text-4xl md:text-6xl pointer-events-none">
+            Find Your Style & Find New Style
           </h1>
-          <p className="font-semibold m-10 text-base md:text-xl">
+          <p className="font-semibold font-serif m-10 text-base md:text-xl">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>

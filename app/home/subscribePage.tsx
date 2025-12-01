@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, ArrowRight, ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
+import Image from "next/image";
 
 const SubscribeOverlay = ({ isOpen, onClose }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -11,51 +12,51 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
     // if (!window.gsap) return;
     // const gsap = window.gsap;
     const ctx = gsap.context(() => {
-        const tl = gsap.timeline();
-  
-        if (isOpen) {
-          document.body.style.overflow = "hidden";
-  
-          tl.to(containerRef.current, {
-            x: "0%",
-            duration: 0.8,
-            ease: "power3.inOut",
-          })
-            .fromTo(
-              contentRef.current,
-              { scale: 1.1, filter: "grayscale(100%)" },
-              {
-                scale: 1,
-                filter: "grayscale(0%)",
-                duration: 1,
-                ease: "power2.out",
-              },
-              "-=0.4"
-            )
-            .fromTo(
-              elementsRef.current,
-              { y: 40, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.6,
-                stagger: 0.15,
-                ease: "power2.out",
-              },
-              "-=0.6"
-            );
-        } else {
-          document.body.style.overflow = "auto";
-          tl.to(containerRef.current, {
-            x: "100%",
-            duration: 0.7,
-            ease: "expo.inOut",
-          });
-        }
-      }, containerRef); 
-  
-      return () => ctx.revert(); 
-    }, [isOpen]);
+      const tl = gsap.timeline();
+
+      if (isOpen) {
+        document.body.style.overflow = "hidden";
+
+        tl.to(containerRef.current, {
+          x: "0%",
+          duration: 0.8,
+          ease: "power3.inOut",
+        })
+          .fromTo(
+            contentRef.current,
+            { scale: 1.1, filter: "grayscale(100%)" },
+            {
+              scale: 1,
+              filter: "grayscale(0%)",
+              duration: 1,
+              ease: "power2.out",
+            },
+            "-=0.4"
+          )
+          .fromTo(
+            elementsRef.current,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.15,
+              ease: "power2.out",
+            },
+            "-=0.6"
+          );
+      } else {
+        document.body.style.overflow = "auto";
+        tl.to(containerRef.current, {
+          x: "100%",
+          duration: 0.7,
+          ease: "expo.inOut",
+        });
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [isOpen]);
 
   return (
     <div
@@ -138,25 +139,25 @@ export default function App() {
     // if (!window.gsap) return;
     // const gsap = window.gsap;
     const ctx = gsap.context(() => {
-        // Intro Animation
-        gsap.fromTo(
+      // Intro Animation
+      gsap.fromTo(
         mainImgRef.current,
         { opacity: 0, scale: 1.15 },
         { opacity: 1, scale: 1, duration: 1.8, ease: "power2.out" }
-        );
+      );
 
-        gsap.fromTo(
+      gsap.fromTo(
         heroTextRef.current,
         { y: 100, opacity: 0 },
         { y: 0, opacity: 1, duration: 1.2, delay: 0.5, ease: "power3.out" }
-        );
+      );
     });
-    
+
     return () => ctx.revert();
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-linear-to-b from-[#030303] to-[#9d8ce0] to-80% text-[#1a1a1a] overflow-hidden py-10 font-sans">
+    <div className="relative min-h-screen bg-linear-to-b from-[#030303] to-[#fad9dc] to-80% text-[#1a1a1a] overflow-hidden py-10 font-sans">
       <SubscribeOverlay
         isOpen={isSubscribeOpen}
         onClose={() => setIsSubscribeOpen(false)}
@@ -190,12 +191,13 @@ export default function App() {
             </div>
 
             <div className="w-full h-full relative p-6 md:p-10 flex items-center justify-center">
-              <div className="w-full h-full relative overflow-hidden shadow-2xl">
-                <img
+              <div className="w-full h-full relative shadow-2xl">
+                <Image
+                  fill
                   ref={mainImgRef}
                   src="https://images.unsplash.com/photo-1502163140606-888448ae8cfe?q=80&w=900&auto=format&fit=crop"
                   alt="Main Editorial"
-                  className="w-full h-full object-cover object-center will-change-transform transition-transform duration-[1.5s] ease-in-out hover:scale-110 filter grayscale-90 group-hover:grayscale-0"
+                  className="w-full h-full object-cover object-center transform-all duration-300 ease-in-out group-hover:scale-110 filter grayscale-90 group-hover:grayscale-0"
                 />
                 {/* Subtle Grain Overlay */}
                 <div className="absolute inset-0 bg-black/5 pointer-events-none mix-blend-multiply"></div>
@@ -213,7 +215,8 @@ export default function App() {
           >
             {/* Background Image dengan efek Zoom halus */}
             <div className="absolute inset-0">
-              <img
+              <Image
+                fill
                 src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop"
                 className="w-full h-full object-cover object-[50%_20%] transition-transform duration-1000 group-hover:scale-110 filter brightness-50 group-hover:brightness-100"
                 alt="Fashion Walk"
@@ -253,9 +256,10 @@ export default function App() {
 
             {/* Cell B: Perfume/Product Shot (Vertical) */}
             <div className="col-span-1 border-r border-b border-gray-300 relative overflow-hidden group">
-              <img
+              <Image
+                fill
                 src="https://images.unsplash.com/photo-1565679871226-33cfa91bedae?q=80&w=6004&auto=format&fit=crop"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                className="w-full h-full object-cover transform-all transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                 alt="Detail Shot"
               />
               <div className="absolute bottom-4 left-4 text-xs text-white/80 bg-black/20 px-2 py-1 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
@@ -279,10 +283,11 @@ export default function App() {
 
               {/* Hands Image */}
               <div className="h-1/2 relative overflow-hidden group">
-                <img
+                <Image
+                  fill
                   src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?q=80&w=600&auto=format&fit=crop"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  alt="Hands Jewelry"
+                  className="w-full h-full object-cover transform-all transition-all duration-700 group-hover:scale-110 grayscale-100 group-hover:grayscale-0"
+                  alt="Beauty Lady"
                 />
               </div>
             </div>

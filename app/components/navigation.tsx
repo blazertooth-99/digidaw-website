@@ -1,19 +1,25 @@
 "use client"
 
 import { ShieldCheck } from "lucide-react"
+import Image from "next/image"
+import DigidawLogo from "@/app/images/digidaw_logo.png"
+
 const NavItem: string[] =
     ['Home', 'Product', 'About', 'Contact']
+
 
 
 const Navigation = () => {
     return (
         <section>
             <nav className="fixed z-50 w-full flex items-center justify-between px-6 py-8 mx-auto animate-fade-up">
-                <div className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center relative overflow-hidden">
-                        <div className="w-5 h-5 bg-black rounded-full absolute -right-1 -bottom-1" />
-                        <div className="w-2 h-2 bg-black rounded-full absolute top-2 left-2" />
-                    </div>
+                <div className="flex w-[120px] md:w-[180px] h-[100px]items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+                    <Image 
+                    src={DigidawLogo}
+                    alt="Digidaw Fashion"
+                    className="object-cover"
+                    
+                    />
                 </div>
 
                 <div className="hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-xl border border-white/10 px-2 py-1.5 rounded-full shadow-2xl shadow-black/50">
