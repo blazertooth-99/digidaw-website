@@ -3,9 +3,8 @@
 import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { url } from "inspector";
+import type { ImageLoaderProps } from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,7 +31,7 @@ const portraits = [
   },
 ];
 
-const loader = ({ src }) => {
+const loader = ({ src }: ImageLoaderProps) => {
   return src;
 };
 
@@ -124,12 +123,6 @@ export default function PortraitGallery() {
       className="trigger relative min-h-screen flex flex-col items-center justify-center py-10 bg-linear-to-b from-[#030303] to-[#fad9dc] to-80% select-none overflow-hidden"
     >
       <div ref={titleRef} className="title mb-8 text-center">
-        {/* <Badge
-          variant="secondary"
-          className="mb-4 bg-white/20 text-white border-none backdrop-blur-sm"
-        >
-          Interactive Gallery
-        </Badge> */}
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
           <span className="bg-clip-text text-transparent bg-linear-to-b font-serif italic from-white to-rose-200">
             Portrait Collection

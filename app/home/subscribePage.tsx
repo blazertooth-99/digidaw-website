@@ -4,17 +4,23 @@ import { gsap } from "gsap";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 
-const SubscribeOverlay = ({ isOpen, onClose }) => {
+interface SubscribeOverlayProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const SubscribeOverlay = ({ isOpen, onClose }: SubscribeOverlayProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLImageElement | null>(null);
-  const elementsRef = useRef<HTMLDivElement[]>([]);
+  const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    if (!containerRef.current || !contentRef.current) return;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
       if (isOpen) {
-        document.body.style.overflow = "hidden";
 
         tl.to(containerRef.current, {
           x: "0%",
@@ -33,7 +39,7 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
             "-=0.4"
           )
           .fromTo(
-            elementsRef.current,
+            elementsRef.current.filter((el): el is HTMLDivElement => el !== null),
             { y: 40, opacity: 0 },
             {
               y: 0,
@@ -56,7 +62,9 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
 
     return () => ctx.revert();
   }, [isOpen]);
-
+  const setElement = (index: number) => (el: HTMLDivElement | null) => {
+    if (el) elementsRef.current[index] = el;
+  };
   return (
     <div
       ref={containerRef}
@@ -86,8 +94,8 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
       </div>
 
       {/* Form Kanan */}
-      <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-24 bg-rose-100 text-[#1c1c1c]">
-        <div ref={(el) => (elementsRef.current[0] = el)}>
+      <div ref={setElement(0)} className="w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-24 bg-rose-100 text-[#1c1c1c]">
+        <div ref={setElement(1)}>
           <div className="flex items-center gap-4 mb-6 opacity-60">
             <div className="h-[1px] w-12 bg-black"></div>
             <p className="text-xs tracking-[0.3em] uppercase">Newsletter</p>
@@ -103,9 +111,9 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
             and culture.
           </p>
         </div>
-
-        <form
-          ref={(el) => (elementsRef.current[1] = el)}
+      <div ref={setElement(0)}>
+        <div
+          ref={setElement(1)}
           className="w-full max-w-md"
           onSubmit={(e) => e.preventDefault()}
         >
@@ -123,7 +131,8 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
             </span>
             <ArrowRight className="group-hover:translate-x-2 transition-transform duration-300" />
           </button>
-        </form>
+        </div>
+        </div>
       </div>
     </div>
   );
