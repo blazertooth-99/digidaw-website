@@ -1,6 +1,5 @@
 "use client"
 
-import { ShieldCheck } from "lucide-react"
 import Image from "next/image"
 import DigidawLogo from "@/app/images/digidaw_logo.png"
 
@@ -27,7 +26,7 @@ const Navigation = () => {
                         <a
                             key={idx}
                             href="#"
-                            className={`px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 ${idx === 0 ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                            className={`px-5 py-2 rounded-full text-base font-medium transition-all duration-300 ${idx === 0 ? 'bg-white/10 text-rose-400' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
                         >
                             {item}
                         </a>
@@ -35,12 +34,9 @@ const Navigation = () => {
                 </div>
 
                 <div className="flex items-center gap-6">
-                    {/* <button className="hidden lg:flex items-center gap-2 bg-[#111] hover:bg-[#222] border border-white/10 px-4 py-2 rounded-full text-xs font-medium transition-all text-gray-300 group">
-                        Protection <ShieldCheck size={14} className="group-hover:text-blue-400 transition-colors" />
-                    </button> */}
-                    <button className="text-xs font-medium hover:text-gray-300 flex items-center gap-2">
-                        <div className="w-5 h-5 rounded-full border border-gray-600 flex items-center justify-center">
-                            <span className="block w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <button className="text-base text-rose-600 font-medium hover:text-rose-400 flex items-center gap-2">
+                        <div className="w-5 h-5 rounded-full border border-rose-600 flex items-center justify-center">
+                            <span className="block w-2 h-2 bg-rose-300 rounded-full"></span>
                         </div>
                         Create Account
                     </button>

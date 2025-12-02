@@ -10,9 +10,9 @@ import Image from "next/image";
 
 const marqueeItems = [
   "AMAZING DESIGN",
-  "MEDIA SOLUTIONS",
+  "BRAND NEWS",
   "BRAND GROWTH",
-  "FOCUSED MEDIA",
+  "FASHION WEEK",
 ];
 
 const pagesLinks = [
@@ -58,7 +58,6 @@ export function Footer() {
         className="overflow-hidden border-b border-white/10 py-4"
       >
         <div ref={marqueeInnerRef} className="flex w-max">
-          {/* Repeat 4 times for truly seamless infinite loop */}
           {[...Array(4)].map((_, setIndex) =>
             marqueeItems.map((item, index) => (
               <span
@@ -87,7 +86,6 @@ export function Footer() {
         </Link>
       </div>
 
-      {/* Main Footer Content */}
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo */}
@@ -116,7 +114,7 @@ export function Footer() {
                     className="group relative text-white/70 text-sm hover:text-white transition-colors duration-300 inline-block"
                   >
                     {link.name}
-                    <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-emerald-400 transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-rose-400 transition-all duration-300 group-hover:w-full" />
                   </Link>
                 </li>
               ))}
@@ -147,7 +145,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 rounded-full border border-white/30 text-white hover:bg-emerald-400 hover:border-emerald-400 hover:text-[#030303] transition-all duration-300"
+                  className="flex items-center justify-center w-9 h-9 rounded-full border border-white/30 text-white hover:bg-rose-300 hover:border-rose-500 hover:text-[#030303] transition-all duration-300"
                   aria-label={social.name}
                 >
                   <social.icon className="w-4 h-4" />

@@ -98,28 +98,28 @@ export default function Home() {
       {/* Intro content */}
       <div
         ref={introRef}
-        className="relative z-30 flex h-full w-full flex-col items-center justify-center bg-white"
+        className="relative z-30 flex h-full w-full flex-col items-center justify-center bg-[#fad9dc]"
       >
-        <div className="inline-block font-sans text-[15vmin] font-black leading-[1.205] text-[#353535]">
+        <div className="inline-block text-[12vmin] font-black font-serif italic leading-[1.205] text-rose-800">
           {/* Hello */}
           <span className="relative inline-block">
             <span ref={firstWordRef} className="opacity-0">
-              Hello{" "}
+             Welcome to{" "}
             </span>
             <span
               ref={firstBgRef}
-              className="absolute left-0 top-0 z-10 block h-full w-full origin-left scale-x-0 bg-[#5fbff9]"
+              className="absolute left-0 top-0 z-10 block h-full w-full origin-left scale-x-0 bg-rose-600"
             />
           </span>
           <br />
           {/* World */}
           <span className="relative ml-[15vmin] inline-block">
             <span ref={secWordRef} className="opacity-0">
-              World
+              Digidaw
             </span>
             <span
               ref={secBgRef}
-              className="absolute left-0 top-0 z-10 block h-full w-full origin-left scale-x-0 bg-[#f06543]"
+              className="absolute left-0 top-0 z-10 block h-full w-full origin-left scale-x-0 bg-rose-300"
             />
           </span>
         </div>
@@ -129,9 +129,9 @@ export default function Home() {
           <Button
             ref={buttonRef}
             // onClick={handleGetStarted}
-            className="mt-12 translate-y-4 cursor-pointer rounded-full bg-[#353535] px-8 py-4 text-lg font-semibold text-white opacity-0 transition-colors hover:bg-[#5fbff9]"
+            className="mt-12 translate-y-4 cursor-pointer rounded-full bg-rose-500 px-8 py-6 text-lg font-semibold text-white opacity-0 transition-colors hover:bg-[#5fbff9]"
           >
-            Get Started &gt;
+            Let's Go &gt;
           </Button>
         </Link>
       </div>

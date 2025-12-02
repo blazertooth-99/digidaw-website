@@ -1,32 +1,76 @@
 "use client";
 
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ChevronDown,
-  ShieldCheck,
-  Zap,
-  Layers,
-  Box,
-  Hexagon,
-  Circle,
-  Activity,
-  Command,
-  Triangle,
-  ArrowDown,
-  ArrowLeft,
-} from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, Zap, ArrowDown } from "lucide-react";
+import Image, { StaticImageData } from "next/image";
+import Autoplay from "embla-carousel-autoplay";
+
 import HeroImage from "@/app/images/hero_banner.png";
 import Floating1 from "@/app/images/floating_1.jpg";
 import Floating2 from "@/app/images/floating_2.png";
 import Floating3 from "@/app/images/floating_3.jpg";
 import Floating4 from "@/app/images/floating_4.jpg";
 
+import Logo3s from "@/app/images/logo/logo_3s_white.png";
+import LogoBloods from "@/app/images/logo/logo_bloods_white.png";
+import LogoAdundas from "@/app/images/logo/logo_adundas_white.png";
+import LogoErigo from "@/app/images/logo/logo_erigo_white.png";
+import LogoPB from "@/app/images/logo/logo_p_b_white.png";
+import LogoHM from "@/app/images/logo/logo_h_m_white.png";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
+import ImageMarquee from "../components/ImageMarquee";
+import { Button } from "@/components/ui/button";
+
+interface ImgMarquee {
+  id: number;
+  alt: string;
+  image: StaticImageData;
+}
+
+const imgMarquee: ImgMarquee[] = [
+  {
+    id: 1,
+    alt: "Logo Bloods",
+    image: LogoBloods,
+  },
+  {
+    id: 2,
+    alt: "Logo Adundas",
+    image: LogoAdundas,
+  },
+  {
+    id: 3,
+    alt: "Logo Erigo",
+    image: LogoErigo,
+  },
+  {
+    id: 4,
+    alt: "Logo Pull&Bear",
+    image: LogoPB,
+  },
+  {
+    id: 5,
+    alt: "Logo HM",
+    image: LogoHM,
+  },
+];
+
+const handleScrollDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  const targetSection = document.querySelector("#portrait_gallery");
+  if (targetSection) {
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
 export default function HeroPage() {
   return (
-    <main className="relative min-h-screen w-full bg-linear-to-b from-gray-600 from-60% to-[#030303] text-white overflow-hidden font-sans selection:bg-blue-500/30 flex flex-col justify-between">
-      {/* --- CSS Animations --- */}
+    <main className="relative min-h-screen w-full bg-linear-to-b from-[#fad9dc] from-40% to-[#030303] text-white overflow-hidden font-sans selection:bg-blue-500/30 flex flex-col justify-between">
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -68,11 +112,10 @@ export default function HeroPage() {
         .delay-700 { animation-delay: 700ms; }
         .delay-1000 { animation-delay: 1000ms; }
       `}</style>
-
-      {/* --- Background Effects --- */}
+      
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Top Right Mist */}
-        <div className="animate-glow absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-linear-to-b from-gray-400/20 to-rose-200 rounded-full blur-[120px]" />
+        <div className="animate-glow absolute top-[-10%] right-[5%] w-[800px] h-[800px] bg-linear-to-b from-gray-400/20 to-rose-200 rounded-full blur-[120px]" />
         <Image
           src={HeroImage}
           alt="Youth Fashion Exclusive"
@@ -85,10 +128,8 @@ export default function HeroPage() {
         <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-rose-200 rounded-full blur-[130px] opacity-20" />
       </div>
 
-      {/* --- Hero Section --- */}
       <section className="relative z-10 flex flex-col items-center justify-center grow px-4 text-center max-w-5xl mx-auto w-full">
         <div className="flex flex-col items-center">
-          {/* Top Tag */}
           <div className="mb-10 inline-flex items-center gap-2 bg-[#1A1A1A]/80 backdrop-blur-sm border border-white/5 px-4 py-1.5 rounded-full cursor-pointer hover:bg-white/10 transition-all group shadow-[0_0_20px_rgba(0,0,0,0.5)] animate-fade-up delay-100">
             <div className="w-4 h-4 bg-gray-800 rounded-full flex items-center justify-center">
               <span className="text-[10px]">Go</span>
@@ -98,38 +139,36 @@ export default function HeroPage() {
             </span>
             <ArrowRight
               size={12}
-              className="text-gray-500 group-hover:translate-x-1 group-hover:text-white transition-all"
+              className="text-white group-hover:translate-x-1 group-hover:text-white transition-all"
             />
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-white mb-6 relative animate-fade-up delay-200">
-            <span className="bg-clip-text text-transparent bg-linear-to-b from-white via-white to-gray-600">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight mb-6 relative animate-fade-up delay-200">
+            <span className="bg-clip-text text-transparent bg-linear-to-b font-serif italic from-gray-600 from-50% to-rose-200">
               Elevate Your Elegant Fashion Here
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg text-gray-400 max-w-2xl mb-12 leading-relaxed font-light animate-fade-up delay-300">
+          <p className="text-2xl text-gray-600 max-w-2xl mb-12 leading-relaxed font-light font-serif italic animate-fade-up delay-300">
             Designed for moments that matters
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-5 animate-fade-up delay-500">
-            <button className="px-8 py-3.5 bg-[#111] hover:bg-[#222] hover:scale-105 border border-white/10 rounded-full text-sm font-medium flex items-center gap-2 transition-all shadow-lg group">
+            <Button 
+            onClick={handleScrollDown}
+            className="px-5 py-6 bg-rose-400 hover:bg-rose-600 hover:scale-105 border border-white/10 rounded-full text-base text-center font-medium flex items-start-center gap-2 transition-all shadow-lg group">
               Let's Explore
               <ArrowDown
-                size={14}
-                className="text-gray-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                size={18}
+                className="text-white group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
               />
-            </button>
-            <button className="px-8 py-3.5 bg-white text-black hover:bg-gray-200 hover:scale-105 rounded-full text-sm font-bold transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            </Button>
+            {/* <button className="px-8 py-3.5  bg-rose-300 text-gray-100 hover:bg-rose-600 hover:scale-105 rounded-full text-sm font-bold transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
               Our Products
-            </button>
+            </button> */}
           </div>
         </div>
 
-        {/* --- Center Vertical Lines (Visual Anchor) --- */}
         <div className="absolute top-[60%] left-1/2 -translate-x-1/2 h-[400px] w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent overflow-hidden pointer-events-none">
           <div className="w-full h-[50%] bg-gradient-to-b from-transparent to-white/50 blur-[1px] animate-drop"></div>
         </div>
@@ -189,21 +228,19 @@ export default function HeroPage() {
               </div>
             </div>
             <div className="text-right pr-2">
-              <p className="text-base text-gray-500 font-mono tracking-wider text-center">
+              <p className="text-base text-white font-mono tracking-wider text-center">
                 Luxury
               </p>
             </div>
           </div>
         </div>
 
-        {/* Node 2: Quant (Top Right) */}
         <div
           className="absolute top-[40%] right-[2%] animate-float"
           style={{ animationDelay: "1.5s" }}
         >
           <div className="flex flex-col items-start gap-3 group">
             <div className="relative">
-              {/* SVG Connector Line */}
               <svg
                 className="absolute top-1/2 right-full mr-4 w-32 h-20 pointer-events-none overflow-visible -z-10 text-white/20"
                 style={{ transform: "scaleX(-1)" }}
@@ -221,7 +258,7 @@ export default function HeroPage() {
                 <Zap size={16} className="text-gray-300" />
               </div>
               <div className="absolute -right-6 top-1/2 -translate-y-1/2">
-              <Image
+                <Image
                   src={Floating4}
                   alt="Hot Model"
                   width={500}
@@ -230,40 +267,37 @@ export default function HeroPage() {
                 />
               </div>
             </div>
-            <div className="text-left pl-2">
-              <p className="text-base text-gray-500 font-mono tracking-wider">
+            <div className="py-5 text-left pl-2">
+              <p className="text-base text-white font-mono tracking-wider">
                 Elegant
               </p>
             </div>
           </div>
         </div>
 
-        {/* Node 3: Aelf (Bottom Left) */}
         <div
           className="absolute bottom-[20%] left-[10%] animate-float"
           style={{ animationDelay: "0.5s" }}
         >
           <div className="flex items-center gap-4 group">
             <div className="w-[200px] h-[200px] bg-[#0A0A0A] border border-white/10 rounded-full flex items-center justify-center group-hover:border-white/30 transition-colors relative">
-            <Image
-                  src={Floating2}
-                  alt="Hot Model"
-                  width={500}
-                  height={500}
-                  className="brightness-80 object-cover rounded-xl"
-                />
+              <Image
+                src={Floating2}
+                alt="Hot Model"
+                width={500}
+                height={500}
+                className="brightness-80 object-cover rounded-xl"
+              />
             </div>
             <div className="relative items-center jsutify-center text-right pr-2">
-              <p className="text-base text-gray-500 font-mono tracking-wider text-center">
+              <p className="text-base text-white font-mono tracking-wider text-center">
                 Top Design
               </p>
             </div>
           </div>
-          {/* Long horizontal line */}
           <div className="absolute top-5 left-14 w-40 h-px bg-gradient-to-r from-white/20 to-transparent"></div>
         </div>
 
-        {/* Node 4: Meeton (Bottom Right) */}
         <div
           className="absolute bottom-[20%] right-[20%] animate-float"
           style={{ animationDelay: "2s" }}
@@ -271,12 +305,12 @@ export default function HeroPage() {
           <div className="flex flex-col items-center gap-2 group">
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <p className="text-base text-gray-500 font-mono tracking-wider">
+                <p className="text-base text-white font-mono tracking-wider">
                   Casual
                 </p>
               </div>
               <div className="w-[200px] h-[200px] bg-[#0A0A0A] border border-white/10 rounded-full flex items-center justify-center group-hover:border-white/30 transition-colors">
-              <Image
+                <Image
                   src={Floating3}
                   alt="Hot Model"
                   width={500}
@@ -290,69 +324,15 @@ export default function HeroPage() {
         </div>
       </div>
 
-      {/* --- ANIMATED FOOTER SECTION --- */}
-      <footer className="relative w-full pb-8 pt-10 z-20 animate-fade-up delay-1000 mt-auto">
-        {/* Footer Background Gradient */}
+      <section className="relative w-full pb-8 pt-10 z-20 animate-fade-up delay-1000 mt-auto">
         <div className="relative w-full h-[150px] z-[-1]" />
 
         <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row justify-between items-end gap-8 lg:gap-0">
-          {/* <div className="flex-shrink-0 mb-2 lg:mb-0">
-            <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
-              <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center text-black group-hover:scale-110 transition-transform">
-                <ChevronDown size={14} />
-              </div>
-              <span className="text-xs text-gray-400 font-medium group-hover:text-white transition-colors">
-                02/03 . Scroll down
-              </span>
-            </div>
-          </div> */}
-
-          {/* Center: Infinite Marquee Partners */}
-          <div className="flex-1 w-full overflow-hidden px-10 relative mask-linear-fade">
-            {/* CSS Mask for fading edges */}
-            <div className="absolute inset-0 z-10 pointer-events-none bg-transparent"></div>
-
-            {/* Scrolling Container */}
-            <div className="flex w-max animate-scroll hover:[animation-play-state:paused]">
-              {[...Array(2)].map((_, i) => (
-                <div
-                  key={i}
-                  className="flex gap-16 mx-8 items-center opacity-80 grayscale"
-                >
-                  <div className="flex items-center gap-2 font-bold text-xl hover:text-white hover:opacity-100 transition-all cursor-pointer">
-                    <span className="w-0 h-0 border-[6px] border-transparent border-b-white mb-1"></span>{" "}
-                    Vercel
-                  </div>
-                  <div className="flex items-center gap-2 font-bold text-xl hover:text-white hover:opacity-100 transition-all cursor-pointer">
-                    <Activity size={18} /> loom
-                  </div>
-                  <div className="flex items-center gap-2 font-bold text-xl hover:text-white hover:opacity-100 transition-all cursor-pointer">
-                    $ Cash App
-                  </div>
-                  <div className="flex items-center gap-2 font-bold text-xl hover:text-white hover:opacity-100 transition-all cursor-pointer">
-                    <div className="border border-current w-4 h-4 rounded-full flex items-center justify-center text-[8px]">
-                      O
-                    </div>{" "}
-                    Loops
-                  </div>
-                  <div className="flex items-center gap-2 font-bold text-xl hover:text-white hover:opacity-100 transition-all cursor-pointer">
-                    _zapier
-                  </div>
-                  <div className="flex items-center gap-2 font-bold text-xl hover:text-white hover:opacity-100 transition-all cursor-pointer">
-                    ramp <ArrowUpRight size={12} />
-                  </div>
-                  <div className="flex items-center gap-2 font-bold text-xl hover:text-white hover:opacity-100 transition-all cursor-pointer">
-                    <Box size={16} /> Raycast
-                  </div>
-                  {/* Duplicate for seamless loop */}
-                </div>
-              ))}
-            </div>
+          <div className="flex-1 w-full px-10 relative">
+            <ImageMarquee />
           </div>
-
-          {/* Right: Pagination Slider */}
-          <div className="flex-shrink-0 text-right mb-2 lg:mb-0">
-            <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-3 font-semibold">
+          <div className="shrink-0 text-right mb-2 lg:mb-0">
+            <p className="text-[10px] text-white uppercase tracking-widest mb-3 font-semibold">
               Digidaw
             </p>
             <div className="flex gap-1.5 justify-end items-center">
@@ -363,7 +343,7 @@ export default function HeroPage() {
             </div>
           </div>
         </div>
-      </footer>
+      </section>
     </main>
   );
 }

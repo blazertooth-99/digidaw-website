@@ -1,9 +1,8 @@
 import { Footer } from "../components/footer";
 import Navigation from "../components/navigation";
-import type { Metadata } from "next";
 
 export const metadata = {
-  title: "Home || Digidaw",
+  title: "Welcome || Digidaw",
 };
 
 export default function HomeLayout({
@@ -11,11 +10,10 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-    console.log("Layout render!!!");
   return (
     <>
       <Navigation />
-      {children}
+        {children}
       <Footer />
     </>
   );

@@ -150,10 +150,12 @@ export default function VerticalImage() {
           ref={titleRef}
           className="absolute text-center w-1/2 text-balance text-white"
         >
-          <h1 className="font-bold font-serif italic text-4xl md:text-6xl pointer-events-none">
-            Find Your Style & Find New Style
-          </h1>
-          <p className="font-semibold font-serif m-10 text-base md:text-xl">
+           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+          <span className="bg-clip-text text-transparent bg-linear-to-b font-serif italic from-white to-rose-200">
+            Find Your Style & Your Passion
+          </span>
+        </h1>
+          <p className="font-semibold font-serif italic m-10 text-base md:text-xl">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
@@ -180,7 +182,7 @@ export default function VerticalImage() {
             {column.map((src, imgIndex) => (
               <div
                 key={imgIndex}
-                className="image-item w-full p-2 sm:p-3 md:p-4 grayscale hover:grayscale-0 hover:z-9999 transition-all duration-300"
+                className="image-item w-full p-2 sm:p-3 md:p-4 brightness-40 grayscale hover:grayscale-0 hover:brightness-100 hover:z-9999 transition-all duration-300"
               >
                 <img
                   src={src || "/placeholder.svg"}

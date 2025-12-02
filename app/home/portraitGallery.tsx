@@ -120,17 +120,20 @@ export default function PortraitGallery() {
   return (
     <main
       ref={containerRef}
+      id="portrait_gallery"
       className="trigger relative min-h-screen flex flex-col items-center justify-center py-10 bg-linear-to-b from-[#030303] to-[#fad9dc] to-80% select-none overflow-hidden"
     >
       <div ref={titleRef} className="title mb-8 text-center">
-        <Badge
+        {/* <Badge
           variant="secondary"
           className="mb-4 bg-white/20 text-white border-none backdrop-blur-sm"
         >
           Interactive Gallery
-        </Badge>
-        <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-          Portrait Collection
+        </Badge> */}
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+          <span className="bg-clip-text text-transparent bg-linear-to-b font-serif italic from-white to-rose-200">
+            Portrait Collection
+          </span>
         </h1>
         <p className="text-white/70 mt-2 text-lg">
           Click on any portrait to expand
@@ -184,7 +187,7 @@ export default function PortraitGallery() {
               loader={loader}
               src={portrait.url}
               alt={portrait.name}
-              style={{ objectFit: "cover"}}
+              style={{ objectFit: "cover" }}
               className="grayscale-90 group-hover:grayscale-0"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

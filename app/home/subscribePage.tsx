@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, ArrowRight, ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
 
 const SubscribeOverlay = ({ isOpen, onClose }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -9,8 +10,6 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
   const elementsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    // if (!window.gsap) return;
-    // const gsap = window.gsap;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
@@ -87,7 +86,7 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
       </div>
 
       {/* Form Kanan */}
-      <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-24 bg-[#e8e6e1] text-[#1c1c1c]">
+      <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-8 md:px-24 bg-rose-100 text-[#1c1c1c]">
         <div ref={(el) => (elementsRef.current[0] = el)}>
           <div className="flex items-center gap-4 mb-6 opacity-60">
             <div className="h-[1px] w-12 bg-black"></div>
@@ -100,8 +99,8 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
             </span>
           </h2>
           <p className="text-lg opacity-70 mb-12 font-light max-w-md leading-relaxed">
-            Bergabunglah dengan lingkaran dalam kami untuk kurasi mingguan
-            tentang seni, mode, dan budaya.
+            Join our inner circle for weekly curated content on art, fashion,
+            and culture.
           </p>
         </div>
 
@@ -111,10 +110,10 @@ const SubscribeOverlay = ({ isOpen, onClose }) => {
           onSubmit={(e) => e.preventDefault()}
         >
           <div className="relative border-b border-black/20 pb-4 mb-10 group focus-within:border-black transition-colors duration-500">
-            <input
+            <Input
               type="email"
               placeholder="Email address"
-              className="w-full bg-transparent text-xl placeholder-black/30 focus:outline-none py-2 font-serif italic"
+              className="w-full bg-transparent border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 text-xl placeholder-black/30 focus:outline-none py-2 font-serif italic border border-transparent"
             />
           </div>
 
@@ -136,10 +135,7 @@ export default function App() {
   const heroTextRef = useRef(null);
 
   useEffect(() => {
-    // if (!window.gsap) return;
-    // const gsap = window.gsap;
     const ctx = gsap.context(() => {
-      // Intro Animation
       gsap.fromTo(
         mainImgRef.current,
         { opacity: 0, scale: 1.15 },
@@ -163,11 +159,8 @@ export default function App() {
         onClose={() => setIsSubscribeOpen(false)}
       />
 
-      {/* --- MAIN LAYOUT (12 Columns) --- */}
       <div className="grid grid-cols-1 lg:grid-cols-12 h-screen border-t border-l border-gray-300 m-10">
-        {/* === SECTION KIRI (IMAGE UTAMA) === */}
         <div className="lg:col-span-7 flex flex-col md:flex-row border-r border-b border-gray-300 relative h-[50vh] lg:h-auto overflow-hidden group">
-          {/* Vertical Brand Bar */}
           <div className="hidden md:flex w-16 lg:w-20 border-r border-gray-300 flex-col justify-between py-10 items-center bg-[#f9f7f2] z-10">
             <span className="rotate-180 writing-vertical-rl text-[10px] tracking-[0.3em] uppercase font-bold text-gray-400">
               Since 2024
@@ -178,15 +171,13 @@ export default function App() {
             </h1>
           </div>
 
-          {/* Main Image Container */}
           <div className="flex-1 relative h-full overflow-hidden bg-[#e0ded8]">
-            {/* Text "MUSE" dibelakang gambar (sedikit) */}
             <div
               ref={heroTextRef}
               className="absolute bottom-0 right-0 z-20 pointer-events-none mix-blend-exclusion px-4 lg:px-10"
             >
               <h1 className="text-[20vw] lg:text-[11rem] leading-none font-serif text-[#f4f1ea] opacity-90 italic">
-                Muse
+                Hot Weekly
               </h1>
             </div>
 
@@ -199,21 +190,17 @@ export default function App() {
                   alt="Main Editorial"
                   className="w-full h-full object-cover object-center transform-all duration-300 ease-in-out group-hover:scale-110 filter grayscale-90 group-hover:grayscale-0"
                 />
-                {/* Subtle Grain Overlay */}
                 <div className="absolute inset-0 bg-black/5 pointer-events-none mix-blend-multiply"></div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* === SECTION KANAN (CONTENT GRID) === */}
         <div className="lg:col-span-5 flex flex-col h-full bg-[#f4f1ea]">
-          {/* 1. TOP BLOCK: GET ACCESS (Dominant CTA) */}
           <div
             className="h-[45%] border-b border-gray-300 relative group cursor-pointer overflow-hidden"
             onClick={() => setIsSubscribeOpen(true)}
           >
-            {/* Background Image dengan efek Zoom halus */}
             <div className="absolute inset-0">
               <Image
                 fill
@@ -224,7 +211,6 @@ export default function App() {
               <div className="absolute inset-0 bg-[#8c3a3a]/0 group-hover:bg-[#8c3a3a]/80 transition-colors duration-500 mix-blend-multiply"></div>
             </div>
 
-            {/* Content Centered */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 p-6 text-center">
               <p className="text-xs tracking-[0.4em] uppercase mb-4 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
                 Exclusive Access
@@ -238,9 +224,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* 2. BOTTOM BLOCK: 3-COLUMN GRID */}
           <div className="h-[55%] grid grid-cols-2 md:grid-cols-3">
-            {/* Cell A: Text Quote */}
             <div className="col-span-2 md:col-span-1 border-r border-b border-gray-300 p-8 flex flex-col justify-between bg-[#f9f7f2]">
               <div className="w-8 h-[1px] bg-black/20"></div>
               <p className="font-serif text-lg leading-relaxed text-gray-800">
@@ -254,7 +238,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Cell B: Perfume/Product Shot (Vertical) */}
             <div className="col-span-1 border-r border-b border-gray-300 relative overflow-hidden group">
               <Image
                 fill
@@ -267,9 +250,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Cell C: Black Box & Hands */}
             <div className="col-span-1 flex flex-col border-b border-gray-300">
-              {/* Black Box */}
               <div
                 className="h-1/2 bg-[#1c1c1c] text-[#f4f1ea] p-4 flex flex-col justify-center items-center text-center cursor-pointer hover:bg-[#8c3a3a] transition-colors duration-500 relative overflow-hidden"
                 onClick={() => setIsSubscribeOpen(true)}
@@ -281,7 +262,6 @@ export default function App() {
                 <ArrowRight className="w-4 h-4 mt-2 opacity-50" />
               </div>
 
-              {/* Hands Image */}
               <div className="h-1/2 relative overflow-hidden group">
                 <Image
                   fill
