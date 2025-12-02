@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 interface MarqueeItemProps {
-  src: string;
+  src: StaticImageData;
   alt: string;
 }
 
